@@ -1,0 +1,260 @@
+{
+  "dataModelId": "fd638ffb-69a3-419a-8267-53df191e4931",
+  "name": "Watch Sales",
+  "url": "https://app.sigmacomputing.com/marko-eutest-mcp/data-model/Watch-Sales-7I8yEm16Un9xDoNqdEflyV",
+  "documentVersion": 1,
+  "latestDocumentVersion": 1,
+  "ownerId": "zw56765imQPImLERMi5bIaR0f1sKY",
+  "folderId": "235f7965-a537-44e3-bb83-6622514be40f",
+  "createdBy": "zw56765imQPImLERMi5bIaR0f1sKY",
+  "updatedBy": "zw56765imQPImLERMi5bIaR0f1sKY",
+  "createdAt": "2026-05-27T13:47:53.898Z",
+  "updatedAt": "2026-05-27T13:47:53.898Z",
+  "schemaVersion": 1,
+  "pages": [
+    {
+      "id": "xwP9dUMJqe",
+      "name": "Main",
+      "elements": [
+        {
+          "id": "OWC45z_czG",
+          "kind": "table",
+          "source": {
+            "connectionId": "6b69616f-593b-4916-946d-e94ebec255fc",
+            "kind": "warehouse-table",
+            "path": [
+              "CSA",
+              "MARK_O",
+              "DIM_WATCHES"
+            ]
+          },
+          "columns": [
+            {
+              "id": "nHhVVEQ9pD",
+              "formula": "[DIM_WATCHES/Id]",
+              "name": "Id"
+            },
+            {
+              "id": "3tq6TKTksl",
+              "formula": "[DIM_WATCHES/Brand]",
+              "name": "Brand"
+            },
+            {
+              "id": "j9ZKjuv9v7",
+              "formula": "[DIM_WATCHES/Watch Name]",
+              "name": "Watch Name"
+            },
+            {
+              "id": "u1SJPzP3Z6",
+              "formula": "[DIM_WATCHES/Watch Size]",
+              "name": "Watch Size"
+            },
+            {
+              "id": "eSGutiVLpC",
+              "formula": "[DIM_WATCHES/Watch Material]",
+              "name": "Watch Material"
+            },
+            {
+              "id": "yCW8gDvQM8",
+              "formula": "[DIM_WATCHES/Price]",
+              "name": "Price"
+            },
+            {
+              "id": "dNuqjGm8we",
+              "formula": "[DIM_WATCHES/Rating]",
+              "name": "Rating"
+            }
+          ],
+          "name": "Products",
+          "order": [
+            "nHhVVEQ9pD",
+            "3tq6TKTksl",
+            "j9ZKjuv9v7",
+            "u1SJPzP3Z6",
+            "eSGutiVLpC",
+            "yCW8gDvQM8",
+            "dNuqjGm8we"
+          ]
+        },
+        {
+          "id": "7a6HuJ1Cv8",
+          "kind": "table",
+          "source": {
+            "kind": "join",
+            "joins": [
+              {
+                "left": {
+                  "connectionId": "6b69616f-593b-4916-946d-e94ebec255fc",
+                  "kind": "warehouse-table",
+                  "path": [
+                    "CSA",
+                    "MARK_O",
+                    "FACT_SALES"
+                  ]
+                },
+                "right": {
+                  "elementId": "OWC45z_czG",
+                  "kind": "table"
+                },
+                "columns": [
+                  {
+                    "left": "[Product Id]",
+                    "right": "[Id]"
+                  }
+                ],
+                "joinType": "left-outer"
+              }
+            ],
+            "primarySource": {
+              "connectionId": "6b69616f-593b-4916-946d-e94ebec255fc",
+              "kind": "warehouse-table",
+              "path": [
+                "CSA",
+                "MARK_O",
+                "FACT_SALES"
+              ]
+            }
+          },
+          "columns": [
+            {
+              "id": "JMp4YCfLCJ",
+              "formula": "[FACT_SALES/Transaction Id]",
+              "name": "Transaction Id"
+            },
+            {
+              "id": "eG_sst7aaJ",
+              "formula": "[FACT_SALES/Sale Timestamp]",
+              "name": "Sale Timestamp"
+            },
+            {
+              "id": "AwiL04EZg6",
+              "formula": "[FACT_SALES/Store Id]",
+              "name": "Store Id"
+            },
+            {
+              "id": "j6-o1Yybm_",
+              "formula": "[FACT_SALES/Product Id]",
+              "name": "Product Id"
+            },
+            {
+              "id": "JpO_X2-psG",
+              "formula": "[FACT_SALES/Customer Id]",
+              "name": "Customer Id"
+            },
+            {
+              "id": "B5J8ATSfNp",
+              "formula": "[FACT_SALES/Quantity]",
+              "name": "Quantity"
+            },
+            {
+              "id": "8LYEtgCAKW",
+              "formula": "[FACT_SALES/Amount]",
+              "name": "Amount",
+              "format": {
+                "kind": "number",
+                "formatString": "$.2f",
+                "decimalSymbol": ".",
+                "digitGroupingSymbol": ",",
+                "digitGroupingSize": [
+                  3
+                ],
+                "currencySymbol": "$"
+              }
+            },
+            {
+              "id": "gMW8HtC1wL",
+              "formula": "[FACT_SALES/Appointment Id]",
+              "name": "Appointment Id"
+            },
+            {
+              "id": "CKXN2qgWWP",
+              "formula": "[Products/Watch Name]",
+              "name": "Watch Name"
+            },
+            {
+              "id": "TObq5lBZqF",
+              "formula": "[Products/Brand]",
+              "name": "Brand"
+            },
+            {
+              "id": "Iub4D1L9PU",
+              "formula": "[Products/Watch Material]",
+              "name": "Watch Material"
+            }
+          ],
+          "name": "Sales",
+          "metrics": [
+            {
+              "id": "ucdB1pHZjk",
+              "formula": "Sum([Amount])",
+              "name": "Total Revenue",
+              "format": {
+                "kind": "number",
+                "formatString": "$.2f",
+                "decimalSymbol": ".",
+                "digitGroupingSymbol": ",",
+                "digitGroupingSize": [
+                  3
+                ],
+                "currencySymbol": "$"
+              },
+              "timeline": {
+                "dateColumnId": "eG_sst7aaJ",
+                "truncation": "month",
+                "comparison": {
+                  "comparisonPeriod": "year",
+                  "direction": "higher-is-better"
+                }
+              }
+            },
+            {
+              "id": "9a9xPxOoqz",
+              "formula": "Count([Transaction Id])",
+              "name": "Transaction Count",
+              "format": {
+                "kind": "number",
+                "formatString": ",.0f"
+              },
+              "timeline": {
+                "dateColumnId": "eG_sst7aaJ",
+                "truncation": "month",
+                "comparison": {
+                  "comparisonPeriod": "year",
+                  "direction": "higher-is-better"
+                }
+              }
+            },
+            {
+              "id": "v3nUtLjHIC",
+              "formula": "Avg([Amount])",
+              "name": "Avg Transaction Value",
+              "format": {
+                "kind": "number",
+                "formatString": "$.2f",
+                "decimalSymbol": ".",
+                "digitGroupingSymbol": ",",
+                "digitGroupingSize": [
+                  3
+                ],
+                "currencySymbol": "$"
+              }
+            }
+          ],
+          "order": [
+            "JMp4YCfLCJ",
+            "eG_sst7aaJ",
+            "AwiL04EZg6",
+            "j6-o1Yybm_",
+            "JpO_X2-psG",
+            "B5J8ATSfNp",
+            "8LYEtgCAKW",
+            "gMW8HtC1wL",
+            "CKXN2qgWWP",
+            "TObq5lBZqF",
+            "Iub4D1L9PU"
+          ]
+        }
+      ]
+    }
+  ]
+}
