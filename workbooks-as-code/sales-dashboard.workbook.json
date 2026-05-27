@@ -1,0 +1,76 @@
+{
+  "name": "Sales Dashboard",
+  "folderId": "83901b11-e356-4d17-b295-43e3c956b9f3",
+  "description": "Sales workbook built over the Sales data model",
+  "schemaVersion": 1,
+  "pages": [
+    {
+      "id": "page-overview",
+      "name": "Sales Overview",
+      "elements": [
+        {
+          "id": "sales-table",
+          "kind": "table",
+          "name": "Sales Data",
+          "source": {
+            "connectionId": "6b69616f-593b-4916-946d-e94ebec255fc",
+            "kind": "warehouse-table",
+            "path": ["CSA", "MARK_O", "FACT_SALES"]
+          },
+          "columns": [
+            {"id": "col-sale-date", "formula": "[FACT_SALES/Sale Timestamp]", "name": "Sale Date"},
+            {"id": "col-store-id", "formula": "[FACT_SALES/Store Id]", "name": "Store ID"},
+            {"id": "col-product-id", "formula": "[FACT_SALES/Product Id]", "name": "Product ID"},
+            {"id": "col-quantity", "formula": "[FACT_SALES/Quantity]", "name": "Quantity"},
+            {"id": "col-amount", "formula": "[FACT_SALES/Amount]", "name": "Amount"},
+            {"id": "col-revenue", "formula": "[Quantity] * [Amount]", "name": "Revenue"}
+          ],
+          "order": ["col-sale-date", "col-store-id", "col-product-id", "col-quantity", "col-amount", "col-revenue"]
+        },
+        {
+          "id": "kpi-total-revenue",
+          "kind": "kpi-chart",
+          "name": "Total Revenue",
+          "source": {"kind": "table", "elementId": "sales-table"},
+          "columns": [
+            {
+              "id": "kpi-val",
+              "formula": "Sum([Sales Data/Revenue])",
+              "name": "Total Revenue",
+              "format": {"kind": "number", "formatString": "$,.0f"}
+            }
+          ],
+          "value": {"id": "kpi-val"}
+        },
+        {
+          "id": "chart-revenue-by-month",
+          "kind": "line-chart",
+          "name": "Revenue Over Time",
+          "source": {"kind": "table", "elementId": "sales-table"},
+          "columns": [
+            {"id": "col-month", "formula": "DateTrunc(\"month\", [Sales Data/Sale Date])", "name": "Month",
+              "format": {"kind": "datetime", "formatString": "%b %Y"}},
+            {"id": "col-monthly-revenue", "formula": "Sum([Sales Data/Revenue])", "name": "Monthly Revenue",
+              "format": {"kind": "number", "formatString": "$,.0f"}}
+          ],
+          "xAxis": {"columnId": "col-month"},
+          "yAxis": {"columnIds": ["col-monthly-revenue"]}
+        },
+        {
+          "id": "chart-revenue-by-store",
+          "kind": "bar-chart",
+          "name": "Revenue by Store",
+          "source": {"kind": "table", "elementId": "sales-table"},
+          "columns": [
+            {"id": "col-store", "formula": "[Sales Data/Store ID]", "name": "Store"},
+            {"id": "col-store-revenue", "formula": "Sum([Sales Data/Revenue])", "name": "Revenue",
+              "format": {"kind": "number", "formatString": "$,.0f"}}
+          ],
+          "xAxis": {"columnId": "col-store", "sort": {"by": "col-store-revenue", "direction": "descending"}},
+          "yAxis": {"columnIds": ["col-store-revenue"]},
+          "stacking": "none"
+        }
+      ]
+    }
+  ]
+}
