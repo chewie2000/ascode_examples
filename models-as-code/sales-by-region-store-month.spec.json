@@ -1,0 +1,208 @@
+{
+  "dataModelId": "f7963279-3542-4c9f-ae14-73a76c789632",
+  "name": "Sales by Region, Store, Month",
+  "url": "https://app.sigmacomputing.com/marko-eutest-mcp/data-model/Sales-by-Region-Store-Month-7xbKc0NuFI1AcMm7eIYAw2",
+  "documentVersion": 2,
+  "latestDocumentVersion": 2,
+  "ownerId": "zw56765imQPImLERMi5bIaR0f1sKY",
+  "folderId": "83901b11-e356-4d17-b295-43e3c956b9f3",
+  "createdBy": "zw56765imQPImLERMi5bIaR0f1sKY",
+  "updatedBy": "zw56765imQPImLERMi5bIaR0f1sKY",
+  "createdAt": "2026-05-27T08:53:53.767Z",
+  "updatedAt": "2026-05-27T09:19:59.883Z",
+  "description": "Single-table sales model from PLUGS_ELECTRONICS_HANDS_ON_LAB_DATA. Includes line-level revenue/cost/profit, date derivations, and Lookup-based YoY metrics matched on (Year Month, Store Key).",
+  "schemaVersion": 1,
+  "pages": [
+    {
+      "id": "6vPdMh3Sd_",
+      "name": "Sales",
+      "elements": [
+        {
+          "id": "QtddjQwvpt",
+          "kind": "table",
+          "source": {
+            "connectionId": "5209b234-9610-4773-81d0-399f136a9a0f",
+            "kind": "warehouse-table",
+            "path": [
+              "RETAIL",
+              "PLUGS_ELECTRONICS",
+              "PLUGS_ELECTRONICS_HANDS_ON_LAB_DATA"
+            ]
+          },
+          "columns": [
+            {
+              "id": "Z34zuoLv1w",
+              "formula": "[PLUGS_ELECTRONICS_HANDS_ON_LAB_DATA/Order Number]"
+            },
+            {
+              "id": "v0KSvsx8Ai",
+              "formula": "[PLUGS_ELECTRONICS_HANDS_ON_LAB_DATA/Date]"
+            },
+            {
+              "id": "q-Tkl-gwAD",
+              "formula": "Year([Date])",
+              "name": "Year"
+            },
+            {
+              "id": "Hj021KEPbE",
+              "formula": "Quarter([Date])",
+              "name": "Quarter"
+            },
+            {
+              "id": "0viosPtC2d",
+              "formula": "Month([Date])",
+              "name": "Month"
+            },
+            {
+              "id": "nDOCw1Rfzh",
+              "formula": "DateTrunc(\"month\", [Date])",
+              "name": "Year Month"
+            },
+            {
+              "id": "dhMFLkrS2f",
+              "formula": "DateAdd(\"year\", -1, [Year Month])",
+              "name": "Prior Year Month"
+            },
+            {
+              "id": "NCSVBtOucR",
+              "formula": "[PLUGS_ELECTRONICS_HANDS_ON_LAB_DATA/Store Region]"
+            },
+            {
+              "id": "A3fESBuecQ",
+              "formula": "[PLUGS_ELECTRONICS_HANDS_ON_LAB_DATA/Store Name]"
+            },
+            {
+              "id": "_3pGYelGd2",
+              "formula": "[PLUGS_ELECTRONICS_HANDS_ON_LAB_DATA/Store Key]"
+            },
+            {
+              "id": "kWq0C7bc3f",
+              "formula": "[PLUGS_ELECTRONICS_HANDS_ON_LAB_DATA/Store State]"
+            },
+            {
+              "id": "BDm-i1NBOA",
+              "formula": "[PLUGS_ELECTRONICS_HANDS_ON_LAB_DATA/Store City]"
+            },
+            {
+              "id": "idj72d85tA",
+              "formula": "[PLUGS_ELECTRONICS_HANDS_ON_LAB_DATA/Product Name]"
+            },
+            {
+              "id": "g-1qXl_Itp",
+              "formula": "[PLUGS_ELECTRONICS_HANDS_ON_LAB_DATA/Sku Number]"
+            },
+            {
+              "id": "z7rb7fRvT_",
+              "formula": "[PLUGS_ELECTRONICS_HANDS_ON_LAB_DATA/Quantity]"
+            },
+            {
+              "id": "ebmo4V8_LY",
+              "formula": "[PLUGS_ELECTRONICS_HANDS_ON_LAB_DATA/Price]"
+            },
+            {
+              "id": "mTOJNEpwwI",
+              "formula": "[PLUGS_ELECTRONICS_HANDS_ON_LAB_DATA/Cost]"
+            },
+            {
+              "id": "LGt63BoHf8",
+              "formula": "[Price] * [Quantity]",
+              "name": "Line Revenue"
+            },
+            {
+              "id": "MOB286bDxX",
+              "formula": "[Cost] * [Quantity]",
+              "name": "Line Cost"
+            },
+            {
+              "id": "ZxoGDaU2UN",
+              "formula": "[Line Revenue] - [Line Cost]",
+              "name": "Line Profit"
+            },
+            {
+              "id": "VqPsTS938C",
+              "formula": "Lookup([Line Revenue], [Prior Year Month], [Year Month], [Store Key], [Store Key])",
+              "name": "Prior Year Line Revenue"
+            },
+            {
+              "id": "Wv9bdBZacx",
+              "formula": "Lookup([Line Profit], [Prior Year Month], [Year Month], [Store Key], [Store Key])",
+              "name": "Prior Year Line Profit"
+            }
+          ],
+          "name": "Sales",
+          "metrics": [
+            {
+              "id": "eirRpLUXhZ",
+              "formula": "Sum([Line Revenue])",
+              "name": "Total Sales"
+            },
+            {
+              "id": "IRYn09bMEx",
+              "formula": "Sum([Line Cost])",
+              "name": "Total Cost"
+            },
+            {
+              "id": "F3U_QXWguT",
+              "formula": "Sum([Line Profit])",
+              "name": "Total Profit"
+            },
+            {
+              "id": "uPJ-RX61z8",
+              "formula": "Sum([Line Profit]) / Sum([Line Revenue])",
+              "name": "Profit Margin %"
+            },
+            {
+              "id": "EjQZyHQaUL",
+              "formula": "CountDistinct([Order Number])",
+              "name": "Order Count"
+            },
+            {
+              "id": "Fpd2Fsy_L0",
+              "formula": "Sum([Prior Year Line Revenue])",
+              "name": "Prior Year Sales"
+            },
+            {
+              "id": "5lbsdgwYe_",
+              "formula": "Sum([Prior Year Line Profit])",
+              "name": "Prior Year Profit"
+            },
+            {
+              "id": "1zHe8kyY-P",
+              "formula": "(Sum([Line Revenue]) - Sum([Prior Year Line Revenue])) / Sum([Prior Year Line Revenue])",
+              "name": "YoY Sales Growth %"
+            },
+            {
+              "id": "THE62lzo_N",
+              "formula": "(Sum([Line Profit]) - Sum([Prior Year Line Profit])) / Sum([Prior Year Line Profit])",
+              "name": "YoY Profit Growth %"
+            }
+          ],
+          "order": [
+            "Z34zuoLv1w",
+            "v0KSvsx8Ai",
+            "q-Tkl-gwAD",
+            "Hj021KEPbE",
+            "0viosPtC2d",
+            "nDOCw1Rfzh",
+            "dhMFLkrS2f",
+            "NCSVBtOucR",
+            "A3fESBuecQ",
+            "_3pGYelGd2",
+            "kWq0C7bc3f",
+            "BDm-i1NBOA",
+            "idj72d85tA",
+            "g-1qXl_Itp",
+            "z7rb7fRvT_",
+            "ebmo4V8_LY",
+            "mTOJNEpwwI",
+            "LGt63BoHf8",
+            "MOB286bDxX",
+            "ZxoGDaU2UN",
+            "VqPsTS938C",
+            "Wv9bdBZacx"
+          ]
+        }
+      ]
+    }
+  ]
+}

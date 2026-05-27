@@ -1,0 +1,230 @@
+{
+  "dataModelId": "0ce5d87d-0828-4339-b7ad-6e8c599fc626",
+  "name": "Sales",
+  "url": "https://app.sigmacomputing.com/marko-eutest-mcp/data-model/Sales-okWKTpaU9A5VC2vZaq44K",
+  "documentVersion": 1,
+  "latestDocumentVersion": 1,
+  "ownerId": "zw56765imQPImLERMi5bIaR0f1sKY",
+  "folderId": "83901b11-e356-4d17-b295-43e3c956b9f3",
+  "createdBy": "zw56765imQPImLERMi5bIaR0f1sKY",
+  "updatedBy": "zw56765imQPImLERMi5bIaR0f1sKY",
+  "createdAt": "2026-05-27T11:49:40.455Z",
+  "updatedAt": "2026-05-27T11:49:40.455Z",
+  "schemaVersion": 1,
+  "pages": [
+    {
+      "id": "5Nzp1RZQK8",
+      "name": "Main",
+      "elements": [
+        {
+          "id": "Os1IVVyzCy",
+          "kind": "table",
+          "source": {
+            "connectionId": "6b69616f-593b-4916-946d-e94ebec255fc",
+            "kind": "warehouse-table",
+            "path": [
+              "CSA",
+              "MARK_O",
+              "DIM_STORE"
+            ]
+          },
+          "columns": [
+            {
+              "id": "6Y1cqkIw09",
+              "formula": "[DIM_STORE/Store Id]",
+              "name": "Store ID"
+            },
+            {
+              "id": "mQlvSo-GLE",
+              "formula": "[DIM_STORE/Store Name]",
+              "name": "Store Name"
+            },
+            {
+              "id": "iWZZOHyH0h",
+              "formula": "[DIM_STORE/City]",
+              "name": "City"
+            },
+            {
+              "id": "kp12bbHrnK",
+              "formula": "[DIM_STORE/State]",
+              "name": "State"
+            },
+            {
+              "id": "rTHd7zY_0w",
+              "formula": "[DIM_STORE/Region]",
+              "name": "Region"
+            }
+          ],
+          "order": [
+            "6Y1cqkIw09",
+            "mQlvSo-GLE",
+            "iWZZOHyH0h",
+            "kp12bbHrnK",
+            "rTHd7zY_0w"
+          ]
+        },
+        {
+          "id": "bvDJwGi1XT",
+          "kind": "table",
+          "source": {
+            "connectionId": "6b69616f-593b-4916-946d-e94ebec255fc",
+            "kind": "warehouse-table",
+            "path": [
+              "CSA",
+              "MARK_O",
+              "DIM_WATCHES"
+            ]
+          },
+          "columns": [
+            {
+              "id": "xDAcgKDG1o",
+              "formula": "[DIM_WATCHES/Id]",
+              "name": "Watch ID"
+            },
+            {
+              "id": "_D2OrcbhlJ",
+              "formula": "[DIM_WATCHES/Brand]",
+              "name": "Brand"
+            },
+            {
+              "id": "5MOQlgumqk",
+              "formula": "[DIM_WATCHES/Watch Name]",
+              "name": "Watch Name"
+            },
+            {
+              "id": "nrYx9dKlXs",
+              "formula": "[DIM_WATCHES/Watch Size]",
+              "name": "Watch Size"
+            },
+            {
+              "id": "9MXZyhrD26",
+              "formula": "[DIM_WATCHES/Watch Material]",
+              "name": "Watch Material"
+            },
+            {
+              "id": "ftqpcFdbLQ",
+              "formula": "[DIM_WATCHES/Price]",
+              "name": "Price"
+            },
+            {
+              "id": "2U3V5xb2OT",
+              "formula": "[DIM_WATCHES/Rating]",
+              "name": "Rating"
+            }
+          ],
+          "order": [
+            "xDAcgKDG1o",
+            "_D2OrcbhlJ",
+            "5MOQlgumqk",
+            "nrYx9dKlXs",
+            "9MXZyhrD26",
+            "ftqpcFdbLQ",
+            "2U3V5xb2OT"
+          ]
+        },
+        {
+          "id": "3hSctKvD1A",
+          "kind": "table",
+          "source": {
+            "connectionId": "6b69616f-593b-4916-946d-e94ebec255fc",
+            "kind": "warehouse-table",
+            "path": [
+              "CSA",
+              "MARK_O",
+              "FACT_SALES"
+            ]
+          },
+          "columns": [
+            {
+              "id": "om7A7TeaY-",
+              "formula": "[FACT_SALES/Transaction Id]",
+              "name": "Transaction ID"
+            },
+            {
+              "id": "VPnUJbYBvf",
+              "formula": "[FACT_SALES/Sale Timestamp]",
+              "name": "Sale Date"
+            },
+            {
+              "id": "XTKgo-wfYZ",
+              "formula": "[FACT_SALES/Store Id]",
+              "name": "Store ID"
+            },
+            {
+              "id": "IRH8Wsded9",
+              "formula": "[FACT_SALES/Product Id]",
+              "name": "Product ID"
+            },
+            {
+              "id": "Bc1N-xTHoz",
+              "formula": "[FACT_SALES/Customer Id]",
+              "name": "Customer ID"
+            },
+            {
+              "id": "pvixCxDt7w",
+              "formula": "[FACT_SALES/Quantity]",
+              "name": "Quantity"
+            },
+            {
+              "id": "NZR48cCio2",
+              "formula": "[FACT_SALES/Amount]",
+              "name": "Amount"
+            },
+            {
+              "id": "kvPJtM0JyN",
+              "formula": "[FACT_SALES/Appointment Id]",
+              "name": "Appointment ID"
+            },
+            {
+              "id": "rF8dp8HVrv",
+              "formula": "[Quantity] * [Amount]",
+              "name": "Revenue"
+            }
+          ],
+          "metrics": [
+            {
+              "id": "ZB7AR_Y8m1",
+              "formula": "Sum([Revenue])",
+              "name": "Total Revenue"
+            }
+          ],
+          "relationships": [
+            {
+              "id": "oXwXLvH_X2",
+              "targetElementId": "Os1IVVyzCy",
+              "keys": [
+                {
+                  "sourceColumnId": "XTKgo-wfYZ",
+                  "targetColumnId": "6Y1cqkIw09"
+                }
+              ],
+              "name": "Sales to Store"
+            },
+            {
+              "id": "GrNP3KifeL",
+              "targetElementId": "bvDJwGi1XT",
+              "keys": [
+                {
+                  "sourceColumnId": "IRH8Wsded9",
+                  "targetColumnId": "xDAcgKDG1o"
+                }
+              ],
+              "name": "Sales to Watch"
+            }
+          ],
+          "order": [
+            "om7A7TeaY-",
+            "VPnUJbYBvf",
+            "XTKgo-wfYZ",
+            "IRH8Wsded9",
+            "Bc1N-xTHoz",
+            "pvixCxDt7w",
+            "NZR48cCio2",
+            "kvPJtM0JyN",
+            "rF8dp8HVrv"
+          ]
+        }
+      ]
+    }
+  ]
+}
