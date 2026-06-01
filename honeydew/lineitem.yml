@@ -1,0 +1,58 @@
+type: entity
+name: lineitem
+display_name: Line Item
+description: |-
+  TPC-H order line items. Grain is one row per (order, line number).
+source: snowflake
+key_dataset: SNOWFLAKE_SAMPLE_DATA.TPCH_SF1.LINEITEM
+keys:
+  - l_orderkey
+  - l_linenumber
+relations:
+  - target_entity: orders
+    rel_type: many-to-one
+    connection:
+      - src_field: l_orderkey
+        target_field: o_orderkey
+attributes:
+  - name: l_orderkey
+    display_name: Order Key
+    description: Foreign key to orders.o_orderkey.
+    expr: lineitem.l_orderkey
+  - name: l_linenumber
+    display_name: Line Number
+    description: Line number within the order.
+    expr: lineitem.l_linenumber
+  - name: l_partkey
+    display_name: Part Key
+    description: Foreign key to part.
+    expr: lineitem.l_partkey
+  - name: l_suppkey
+    display_name: Supplier Key
+    description: Foreign key to supplier.
+    expr: lineitem.l_suppkey
+  - name: l_quantity
+    display_name: Quantity
+    description: Quantity of units on the line.
+    expr: lineitem.l_quantity
+  - name: l_extendedprice
+    display_name: Extended Price
+    description: Extended (gross) price for the line.
+    expr: lineitem.l_extendedprice
+  - name: l_discount
+    display_name: Discount
+    description: Discount fraction applied to the line.
+    expr: lineitem.l_discount
+  - name: l_returnflag
+    display_name: Return Flag
+    description: R = returned, A = accepted, N = neither.
+    expr: lineitem.l_returnflag
+  - name: l_shipdate
+    display_name: Ship Date
+    description: Date the line shipped.
+    expr: lineitem.l_shipdate
+metrics:
+  - name: total_revenue
+    display_name: Total Revenue
+    description: Discounted line-item revenue (extended price net of discount).
+    expr: SUM(lineitem.l_extendedprice * (1 - lineitem.l_discount))

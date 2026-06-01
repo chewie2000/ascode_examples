@@ -1,0 +1,117 @@
+{
+  "dataModelId": "2e8787d0-c731-47e0-903a-540a5792e0fe",
+  "name": "ModelExample1",
+  "url": "https://app.sigmacomputing.com/marko-eutest-mcp/data-model/ModelExample1-1pNAfso1S5hfctAbalG61E",
+  "documentVersion": 2,
+  "latestDocumentVersion": 2,
+  "ownerId": "zw56765imQPImLERMi5bIaR0f1sKY",
+  "folderId": "b888e22e-86d9-4a4e-87c9-c12aad6639b5",
+  "createdBy": "zw56765imQPImLERMi5bIaR0f1sKY",
+  "updatedBy": "zw56765imQPImLERMi5bIaR0f1sKY",
+  "createdAt": "2026-05-29T09:37:19.982Z",
+  "updatedAt": "2026-05-29T09:39:45.318Z",
+  "schemaVersion": 1,
+  "pages": [
+    {
+      "id": "NrpG5SLCx5",
+      "name": "Page 1",
+      "elements": [
+        {
+          "id": "mmEThCOvFR",
+          "kind": "table",
+          "source": {
+            "connectionId": "5209b234-9610-4773-81d0-399f136a9a0f",
+            "statement": "-- ============================================================\n-- Product Family Performance Analysis\n-- Security:  Row-level by store_region user attribute\n-- Control:   {{product-family-filter}} (Multi-select List, optional)\n-- Output:    Designed for a Bar or Line chart in Sigma\n-- ============================================================\n\nWITH base AS (\n    SELECT\n        DATE_TRUNC('month', DATE)                          AS order_month,\n        PRODUCT_FAMILY,\n        PRODUCT_TYPE,\n        STORE_REGION,\n        STORE_STATE,\n        SUM(PRICE * QUANTITY)                              AS total_revenue,\n        SUM(COST  * QUANTITY)                              AS total_cost,\n        SUM((PRICE - COST) * QUANTITY)                     AS total_profit,\n        COUNT(DISTINCT ORDER_NUMBER)                       AS order_count,\n        SUM(QUANTITY)                                      AS units_sold\n    FROM\n        EXAMPLES.PLUGS_ELECTRONICS.PLUGS_ELECTRONICS_HANDS_ON_LAB_DATA\n    WHERE\n        -- ── User Attribute: Region-level row security ──────────────\n        STORE_REGION = {{system::CurrentUserAttributeText::Store_Region}}\n\n        -- ── Optional: Single-select product family filter ─────────\n        AND CASE\n                WHEN {{product-family-filter}} = '' THEN TRUE\n                ELSE PRODUCT_FAMILY = {{product-family-filter}}\n            END\n\n        -- ── Guard: exclude zero/negative price rows ───────────────\n        AND PRICE > 0\n        AND COST  > 0\n\n    GROUP BY 1, 2, 3, 4, 5\n),\n\nranked AS (\n    SELECT\n        *,\n        ROUND(\n            (total_profit / NULLIF(total_revenue, 0)) * 100, 2\n        )                                                   AS profit_margin_pct,\n\n        ROUND(\n            total_revenue / NULLIF(\n                SUM(total_revenue) OVER (PARTITION BY order_month), 0\n            ) * 100, 2\n        )                                                   AS revenue_share_pct,\n\n        total_revenue - LAG(total_revenue) OVER (\n            PARTITION BY PRODUCT_FAMILY\n            ORDER BY order_month\n        )                                                   AS mom_revenue_delta,\n\n        RANK() OVER (\n            PARTITION BY order_month\n            ORDER BY total_revenue DESC\n        )                                                   AS revenue_rank\n    FROM base\n)\n\nSELECT\n    order_month,\n    PRODUCT_FAMILY,\n    PRODUCT_TYPE,\n    STORE_REGION,\n    STORE_STATE,\n    total_revenue,\n    total_cost,\n    total_profit,\n    profit_margin_pct,\n    revenue_share_pct,\n    mom_revenue_delta,\n    revenue_rank,\n    order_count,\n    units_sold\nFROM ranked\nORDER BY order_month, total_revenue DESC",
+            "kind": "sql"
+          },
+          "columns": [
+            {
+              "id": "ORDER_MONTH",
+              "formula": "[Custom SQL/ORDER_MONTH]"
+            },
+            {
+              "id": "PRODUCT_FAMILY",
+              "formula": "[Custom SQL/PRODUCT_FAMILY]"
+            },
+            {
+              "id": "PRODUCT_TYPE",
+              "formula": "[Custom SQL/PRODUCT_TYPE]"
+            },
+            {
+              "id": "STORE_REGION",
+              "formula": "[Custom SQL/STORE_REGION]"
+            },
+            {
+              "id": "STORE_STATE",
+              "formula": "[Custom SQL/STORE_STATE]"
+            },
+            {
+              "id": "TOTAL_REVENUE",
+              "formula": "[Custom SQL/TOTAL_REVENUE]"
+            },
+            {
+              "id": "TOTAL_COST",
+              "formula": "[Custom SQL/TOTAL_COST]"
+            },
+            {
+              "id": "TOTAL_PROFIT",
+              "formula": "[Custom SQL/TOTAL_PROFIT]"
+            },
+            {
+              "id": "PROFIT_MARGIN_PCT",
+              "formula": "[Custom SQL/PROFIT_MARGIN_PCT]"
+            },
+            {
+              "id": "REVENUE_SHARE_PCT",
+              "formula": "[Custom SQL/REVENUE_SHARE_PCT]"
+            },
+            {
+              "id": "MOM_REVENUE_DELTA",
+              "formula": "[Custom SQL/MOM_REVENUE_DELTA]"
+            },
+            {
+              "id": "REVENUE_RANK",
+              "formula": "[Custom SQL/REVENUE_RANK]"
+            },
+            {
+              "id": "ORDER_COUNT",
+              "formula": "[Custom SQL/ORDER_COUNT]"
+            },
+            {
+              "id": "UNITS_SOLD",
+              "formula": "[Custom SQL/UNITS_SOLD]"
+            }
+          ],
+          "name": "Chart Example 1",
+          "order": [
+            "ORDER_MONTH",
+            "PRODUCT_FAMILY",
+            "PRODUCT_TYPE",
+            "STORE_REGION",
+            "STORE_STATE",
+            "TOTAL_REVENUE",
+            "TOTAL_COST",
+            "TOTAL_PROFIT",
+            "PROFIT_MARGIN_PCT",
+            "REVENUE_SHARE_PCT",
+            "MOM_REVENUE_DELTA",
+            "REVENUE_RANK",
+            "ORDER_COUNT",
+            "UNITS_SOLD"
+          ]
+        },
+        {
+          "kind": "control",
+          "controlId": "product-family-filter",
+          "id": "zs9xL-I3CG",
+          "case": "insensitive",
+          "controlType": "text",
+          "mode": "equals",
+          "value": "Computers & Tablets",
+          "includeNulls": "when-no-value-is-selected",
+          "showOperators": false
+        }
+      ]
+    }
+  ]
+}

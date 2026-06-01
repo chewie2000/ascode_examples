@@ -1,0 +1,45 @@
+type: entity
+name: orders
+display_name: Orders
+description: |-
+  TPC-H orders fact. One row per order header.
+source: snowflake
+key_dataset: SNOWFLAKE_SAMPLE_DATA.TPCH_SF1.ORDERS
+keys:
+  - o_orderkey
+relations:
+  - target_entity: customer
+    rel_type: many-to-one
+    connection:
+      - src_field: o_custkey
+        target_field: c_custkey
+attributes:
+  - name: o_orderkey
+    display_name: Order Key
+    description: Primary key of the order.
+    expr: orders.o_orderkey
+  - name: o_custkey
+    display_name: Customer Key
+    description: Foreign key to customer.c_custkey.
+    expr: orders.o_custkey
+  - name: o_orderstatus
+    display_name: Order Status
+    description: Status flag - F (finished), O (open), P (pending).
+    expr: orders.o_orderstatus
+  - name: o_orderdate
+    display_name: Order Date
+    description: Date the order was placed.
+    expr: orders.o_orderdate
+  - name: o_orderpriority
+    display_name: Order Priority
+    description: Priority designation for the order.
+    expr: orders.o_orderpriority
+  - name: o_totalprice
+    display_name: Order Total Price
+    description: Total price of the order at the header level.
+    expr: orders.o_totalprice
+metrics:
+  - name: order_count
+    display_name: Order Count
+    description: Distinct number of orders.
+    expr: COUNT(DISTINCT orders.o_orderkey)

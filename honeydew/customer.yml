@@ -1,0 +1,35 @@
+type: entity
+name: customer
+display_name: Customer
+description: |-
+  TPC-H customer dimension. One row per customer.
+source: snowflake
+key_dataset: SNOWFLAKE_SAMPLE_DATA.TPCH_SF1.CUSTOMER
+keys:
+  - c_custkey
+attributes:
+  - name: c_custkey
+    display_name: Customer Key
+    description: Surrogate primary key of the customer.
+    expr: customer.c_custkey
+  - name: c_name
+    display_name: Customer Name
+    description: Customer full name.
+    expr: customer.c_name
+  - name: c_mktsegment
+    display_name: Market Segment
+    description: Business segment the customer belongs to.
+    expr: customer.c_mktsegment
+  - name: c_nationkey
+    display_name: Nation Key
+    description: Foreign key to the customer's nation.
+    expr: customer.c_nationkey
+  - name: c_acctbal
+    display_name: Account Balance
+    description: Customer account balance.
+    expr: customer.c_acctbal
+metrics:
+  - name: customer_count
+    display_name: Customer Count
+    description: Distinct number of customers.
+    expr: COUNT(DISTINCT customer.c_custkey)
