@@ -1,0 +1,415 @@
+{
+  "dataModelId": "ee43fb8d-cf12-4994-ad82-1e928f78ee0f",
+  "name": "Plugs Electronics - Databricks",
+  "url": "https://app.sigmacomputing.com/marko-eutest-mcp/data-model/Plugs-Electronics-Databricks-7fBf08SFE1VXaF1YIoobWn",
+  "documentVersion": 1,
+  "latestDocumentVersion": 1,
+  "ownerId": "zw56765imQPImLERMi5bIaR0f1sKY",
+  "folderId": "f3934f06-3338-4ab1-9120-10ad0c7ab49c",
+  "createdBy": "zw56765imQPImLERMi5bIaR0f1sKY",
+  "updatedBy": "zw56765imQPImLERMi5bIaR0f1sKY",
+  "createdAt": "2026-06-09T09:52:51.418Z",
+  "updatedAt": "2026-06-09T10:13:25.464Z",
+  "schemaVersion": 1,
+  "pages": [
+    {
+      "id": "pEOn8LUCLk",
+      "name": "Data",
+      "elements": [
+        {
+          "id": "jgKWzKOni0",
+          "kind": "table",
+          "source": {
+            "connectionId": "43d74065-c84e-4d9d-aefc-8da5493d4235",
+            "kind": "warehouse-table",
+            "path": [
+              "sigma_sample_data",
+              "examples__plugs_electronics",
+              "plugs_electronics_hands_on_lab_data"
+            ]
+          },
+          "columns": [
+            {
+              "id": "ks3oVMd30V",
+              "formula": "[plugs_electronics_hands_on_lab_data/Order Number]",
+              "name": "Order Number",
+              "description": "Unique identifier for each order"
+            },
+            {
+              "id": "7ekAv6ZeMe",
+              "formula": "[plugs_electronics_hands_on_lab_data/Date]",
+              "name": "Order Date",
+              "description": "Date the order was placed",
+              "format": {
+                "kind": "datetime",
+                "formatString": "%b %d, %Y"
+              }
+            },
+            {
+              "id": "JXy2cy57X0",
+              "formula": "[plugs_electronics_hands_on_lab_data/Sku Number]",
+              "name": "SKU Number",
+              "description": "Stock keeping unit code for the product sold"
+            },
+            {
+              "id": "Itr4dxgTgH",
+              "formula": "[plugs_electronics_hands_on_lab_data/Quantity]",
+              "name": "Quantity",
+              "description": "Number of units sold on the order line"
+            },
+            {
+              "id": "dZO-FiqbGK",
+              "formula": "[plugs_electronics_hands_on_lab_data/Cost]",
+              "name": "Cost",
+              "description": "Unit cost paid by the business",
+              "format": {
+                "kind": "number",
+                "formatString": "$.2f",
+                "decimalSymbol": ".",
+                "digitGroupingSymbol": ",",
+                "digitGroupingSize": [
+                  3
+                ],
+                "currencySymbol": "$"
+              }
+            },
+            {
+              "id": "ouLW__-eHr",
+              "formula": "[plugs_electronics_hands_on_lab_data/Price]",
+              "name": "Price",
+              "description": "Unit price charged to the customer",
+              "format": {
+                "kind": "number",
+                "formatString": "$.2f",
+                "decimalSymbol": ".",
+                "digitGroupingSymbol": ",",
+                "digitGroupingSize": [
+                  3
+                ],
+                "currencySymbol": "$"
+              }
+            },
+            {
+              "id": "nrQrV74xeA",
+              "formula": "[plugs_electronics_hands_on_lab_data/Product Type]",
+              "name": "Product Type",
+              "description": "Specific product category"
+            },
+            {
+              "id": "VaeGOnPj9Q",
+              "formula": "[plugs_electronics_hands_on_lab_data/Product Family]",
+              "name": "Product Family",
+              "description": "High-level product grouping"
+            },
+            {
+              "id": "z_Zu94tdvd",
+              "formula": "[plugs_electronics_hands_on_lab_data/Product Name]",
+              "name": "Product Name",
+              "description": "Name of the product sold"
+            },
+            {
+              "id": "HDkJg54c_o",
+              "formula": "[plugs_electronics_hands_on_lab_data/Store Name]",
+              "name": "Store Name",
+              "description": "Name of the store where the sale occurred"
+            },
+            {
+              "id": "Y7RMDljgPk",
+              "formula": "[plugs_electronics_hands_on_lab_data/Store Key]",
+              "name": "Store Key",
+              "description": "Surrogate key identifying the store"
+            },
+            {
+              "id": "nxc-HO9djE",
+              "formula": "[plugs_electronics_hands_on_lab_data/Store Region]",
+              "name": "Store Region",
+              "description": "US region the store belongs to: Northeast, Southeast, Northwest, Southwest, Midwest"
+            },
+            {
+              "id": "YJaAAjnrA-",
+              "formula": "[plugs_electronics_hands_on_lab_data/Store State]",
+              "name": "Store State",
+              "description": "US state where the store is located"
+            },
+            {
+              "id": "50-jURKk3s",
+              "formula": "[plugs_electronics_hands_on_lab_data/Store City]",
+              "name": "Store City",
+              "description": "City where the store is located"
+            },
+            {
+              "id": "4POJuFjmHH",
+              "formula": "[plugs_electronics_hands_on_lab_data/Store Latitude]",
+              "name": "Store Latitude",
+              "description": "Store location latitude"
+            },
+            {
+              "id": "rSsX74y1jO",
+              "formula": "[plugs_electronics_hands_on_lab_data/Store Longitude]",
+              "name": "Store Longitude",
+              "description": "Store location longitude"
+            },
+            {
+              "id": "k2IwDNLGhm",
+              "formula": "[plugs_electronics_hands_on_lab_data/Customer Name]",
+              "name": "Customer Name",
+              "description": "Name of the customer who placed the order"
+            },
+            {
+              "id": "RjUo0pJl3c",
+              "formula": "[plugs_electronics_hands_on_lab_data/Cust Key]",
+              "name": "Customer Key",
+              "description": "Surrogate key identifying the customer"
+            },
+            {
+              "id": "KC5OmqBvQ0",
+              "formula": "[plugs_electronics_hands_on_lab_data/Cust Json]",
+              "name": "Customer JSON",
+              "description": "Raw JSON payload of customer attributes"
+            },
+            {
+              "id": "LrugLzu28W",
+              "formula": "[Quantity] * [Price]",
+              "name": "Revenue",
+              "description": "Line-level revenue: quantity multiplied by unit price",
+              "format": {
+                "kind": "number",
+                "formatString": "$.2f",
+                "decimalSymbol": ".",
+                "digitGroupingSymbol": ",",
+                "digitGroupingSize": [
+                  3
+                ],
+                "currencySymbol": "$"
+              }
+            },
+            {
+              "id": "nUS6LVOhb-",
+              "formula": "[Quantity] * [Cost]",
+              "name": "Line Cost",
+              "description": "Line-level cost: quantity multiplied by unit cost",
+              "format": {
+                "kind": "number",
+                "formatString": "$.2f",
+                "decimalSymbol": ".",
+                "digitGroupingSymbol": ",",
+                "digitGroupingSize": [
+                  3
+                ],
+                "currencySymbol": "$"
+              }
+            },
+            {
+              "id": "4o6grDclGm",
+              "formula": "[Revenue] - [Line Cost]",
+              "name": "Line Profit",
+              "description": "Line-level profit: revenue minus line cost",
+              "format": {
+                "kind": "number",
+                "formatString": "$.2f",
+                "decimalSymbol": ".",
+                "digitGroupingSymbol": ",",
+                "digitGroupingSize": [
+                  3
+                ],
+                "currencySymbol": "$"
+              }
+            }
+          ],
+          "name": "Sales",
+          "metrics": [
+            {
+              "id": "RSs2WcJy2m",
+              "formula": "Sum([Revenue])",
+              "name": "Total Revenue",
+              "description": "Sum of line-level revenue across all orders",
+              "format": {
+                "kind": "number",
+                "formatString": "$.2f",
+                "decimalSymbol": ".",
+                "digitGroupingSymbol": ",",
+                "digitGroupingSize": [
+                  3
+                ],
+                "currencySymbol": "$"
+              }
+            },
+            {
+              "id": "Vbs3Q4aE4V",
+              "formula": "Sum([Line Cost])",
+              "name": "Total Cost",
+              "description": "Sum of line-level cost across all orders",
+              "format": {
+                "kind": "number",
+                "formatString": "$.2f",
+                "decimalSymbol": ".",
+                "digitGroupingSymbol": ",",
+                "digitGroupingSize": [
+                  3
+                ],
+                "currencySymbol": "$"
+              }
+            },
+            {
+              "id": "aylVEobOSW",
+              "formula": "Sum([Line Profit])",
+              "name": "Gross Profit",
+              "description": "Total revenue minus total cost",
+              "format": {
+                "kind": "number",
+                "formatString": "$.2f",
+                "decimalSymbol": ".",
+                "digitGroupingSymbol": ",",
+                "digitGroupingSize": [
+                  3
+                ],
+                "currencySymbol": "$"
+              }
+            },
+            {
+              "id": "GUBJP5E5Xs",
+              "formula": "Sum([Line Profit]) / NullIf(Sum([Revenue]), 0)",
+              "name": "Profit Margin",
+              "description": "Gross profit as a percentage of total revenue",
+              "format": {
+                "kind": "number",
+                "formatString": ".1%"
+              }
+            },
+            {
+              "id": "3DRpUul2A9",
+              "formula": "CountDistinct([Order Number])",
+              "name": "Order Count",
+              "description": "Number of distinct orders",
+              "format": {
+                "kind": "number",
+                "formatString": ",.0f"
+              }
+            },
+            {
+              "id": "X-TxbQmO-i",
+              "formula": "Sum([Quantity])",
+              "name": "Units Sold",
+              "description": "Total number of units sold",
+              "format": {
+                "kind": "number",
+                "formatString": ",.0f"
+              }
+            },
+            {
+              "id": "QmmhOzaldM",
+              "formula": "Sum([Revenue]) / NullIf(CountDistinct([Order Number]), 0)",
+              "name": "Avg Order Value",
+              "description": "Average revenue per distinct order",
+              "format": {
+                "kind": "number",
+                "formatString": "$.2f",
+                "decimalSymbol": ".",
+                "digitGroupingSymbol": ",",
+                "digitGroupingSize": [
+                  3
+                ],
+                "currencySymbol": "$"
+              }
+            }
+          ],
+          "order": [
+            "ks3oVMd30V",
+            "7ekAv6ZeMe",
+            "JXy2cy57X0",
+            "Itr4dxgTgH",
+            "dZO-FiqbGK",
+            "ouLW__-eHr",
+            "nrQrV74xeA",
+            "VaeGOnPj9Q",
+            "z_Zu94tdvd",
+            "HDkJg54c_o",
+            "Y7RMDljgPk",
+            "nxc-HO9djE",
+            "YJaAAjnrA-",
+            "50-jURKk3s",
+            "4POJuFjmHH",
+            "rSsX74y1jO",
+            "k2IwDNLGhm",
+            "RjUo0pJl3c",
+            "KC5OmqBvQ0",
+            "LrugLzu28W",
+            "nUS6LVOhb-",
+            "4o6grDclGm"
+          ]
+        },
+        {
+          "kind": "control",
+          "controlId": "Region",
+          "id": "ctrl-region",
+          "filters": [
+            {
+              "source": {
+                "kind": "table",
+                "elementId": "jgKWzKOni0"
+              },
+              "columnId": "nxc-HO9djE"
+            }
+          ],
+          "controlType": "list",
+          "mode": "include",
+          "selectionMode": "multiple",
+          "values": [],
+          "source": {
+            "kind": "source",
+            "source": {
+              "kind": "table",
+              "elementId": "jgKWzKOni0"
+            },
+            "columnId": "nxc-HO9djE"
+          }
+        },
+        {
+          "kind": "control",
+          "controlId": "ProductFamily",
+          "id": "ctrl-product-family",
+          "filters": [
+            {
+              "source": {
+                "kind": "table",
+                "elementId": "jgKWzKOni0"
+              },
+              "columnId": "VaeGOnPj9Q"
+            }
+          ],
+          "controlType": "list",
+          "mode": "include",
+          "selectionMode": "multiple",
+          "values": [],
+          "source": {
+            "kind": "source",
+            "source": {
+              "kind": "table",
+              "elementId": "jgKWzKOni0"
+            },
+            "columnId": "VaeGOnPj9Q"
+          }
+        },
+        {
+          "kind": "control",
+          "controlId": "OrderDate",
+          "id": "ctrl-order-date",
+          "filters": [
+            {
+              "source": {
+                "kind": "table",
+                "elementId": "jgKWzKOni0"
+              },
+              "columnId": "7ekAv6ZeMe"
+            }
+          ],
+          "controlType": "date-range",
+          "mode": "between",
+          "startDate": "2025-06-09T00:00:00Z",
+          "endDate": "2026-06-09T23:59:59Z",
+          "includeNulls": "when-no-value-is-selected"
+        }
+      ]
+    }
+  ]
+}
