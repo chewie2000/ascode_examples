@@ -4,3 +4,6 @@ __pycache__/
 .dolt/
 *.db
 .beads-credential-key
+
+# Beads issue-tracker data — private, must not be pushed to a public repo
+.beads/
